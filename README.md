@@ -4,7 +4,6 @@ Course Project for Natural Language Processing (COL772)
                                                                                                       
 ## Possible Ideas                                                                                     
                                                                                                       
-* Enhancing word embeddings (http://ruder.io/word-embeddings-2017/)                                   
 * Image Captioning on out of domain data (http://aclweb.org/anthology/D17-1098)                       
 * Tweet based summarization ->                                                                        
   * Extract Sentiment                                                                                 
