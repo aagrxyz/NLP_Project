@@ -30,3 +30,11 @@ Course Project for Natural Language Processing (COL772)
 * Autocorrection / Completion => https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2760954.pdf
 * Response creator => https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2748516.pdf
 
+
+* ~Answer question based on product reviews~
+* Summarization
+  * ACL => https://nlp.stanford.edu/pubs/see2017get.pdf
+  * CS224n => https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2762104.pdf
+* Headline generation => https://nlp.stanford.edu/courses/cs224n/2015/reports/1.pdf
+* Auto reply => https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2748516.pdf
+
