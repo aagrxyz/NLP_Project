@@ -32,17 +32,18 @@ top=30mm,
 \begin{document}
 \maketitle
 \section{Goal}
-    Our aim is to create a model that can learn to auto reply to tweets.
+    Our aim is to create a model that can learn to generate reply for tweets. Further, we would also experiment
+    with other domains like email and dialogues.
 \section{Dataset}
 \section{Literature}
     Recently, google released a paper ``Smart Reply''\cite{paper:smartReply}, which is their model for 
-    email auto responder. Apart from this, there are various papers on summarization\cite{paper:pointer}
+    email auto responder. Apart from this, there are various papers on text summarization\cite{paper:pointer}
     where we plan to take inspiration from.\\
     We have not found a paper that exactly does twitter replies and thus we would be writing code from scratch.
 \section{Evaluation}
     For quantitative evaluation, we are currently planning on using the perplexity as our loss measure. The gold
     labels, would be a held out test data from the whole dataset. We would also be reporting the BLEU, METEOR and
-    ROGUE metric, of our predictions.\\
+    ROGUE metric of our predictions.\\
     For qualitative evaluation, we can just look at some randomly sampled results and judge their quality.
 
     \bibliographystyle{unsrt}
