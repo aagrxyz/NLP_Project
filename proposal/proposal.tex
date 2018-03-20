@@ -1,0 +1,37 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{cleveref}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\newcommand{\scomment}[1]{{\bf{\color{red}{{[Suyash: #1]}}}}}
+\newcommand{\acomment}[1]{{\bf{\color{blue}{{[Aman: #1]}}}}}
+\newcommand{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} - \nameref*{#1}}} % One single link
+\newcommand{\figref}[1]{\hyperref[{#1}]{\autoref*{#1}}} % One single link
+
+\hypersetup{
+colorlinks=true,
+allcolors=blue,
+}
+
+
+\usepackage{geometry}
+\geometry{
+a4paper,
+left=20mm,
+top=30mm,
+}
+
+\title{COL772: Project Proposal}
+\author{Suyash Agrawal (2015CS10262) \\ Aman Agrawal (2015CS10210)}
+
+\begin{document}
+\maketitle
+\section{Text Classification}
+    \bibliographystyle{unsrt}
+    \bibliography{proposal}
+\end{document}
