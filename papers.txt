@@ -1,0 +1,40 @@
+* Automatic Text Scoring Using Neural Networks
+  https://arxiv.org/pdf/1606.04289.pdf
+  https://github.com/dimalik/ats/
+
+* Convolutional Sequence to Sequence Learning
+  https://arxiv.org/pdf/1705.03122.pdf
+  https://github.com/facebookresearch/fairseq-py
+  https://github.com/facebookresearch/fairseq
+  FAIR
+
+* Ask Me Anything:
+  Dynamic Memory Networks for Natural Language Processing
+  EXTERNAL: https://github.com/DSKSD/DeepNLP-models-Pytorch
+
+* AWESOME: https://github.com/endymecy/awesome-deeplearning-resources
+
+* 2018
+  Query and Output: Generating Words by Querying Distributed Word Representations for Paraphrase Generation
+  https://arxiv.org/pdf/1803.01465.pdf
+  https://github.com/lancopku/WEAN
+
+* LanideNN: Multilingual Language Identification on Character Window
+  https://arxiv.org/pdf/1701.03338
+  https://github.com/tomkocmi/LanideNN
+
+* Learning to Generate Reviews and Discovering Sentiment
+  https://arxiv.org/abs/1704.01444.pdf
+  https://github.com/openai/generating-reviews-discovering-sentiment
+
+* What's in a Question: Using Visual Questions as a Form of Supervision
+  https://arxiv.org/abs/1704.03895.pdf
+
+* Natural Language Communication with Robots
+  http://yonatanbisk.com/papers/2016-NAACL.pdf
+  https://github.com/ybisk/GroundedLanguage
+  https://groundedlanguage.github.io/
+
+* Fast and Easy Short Answer Grading with High Accuracy
+  http://www.aclweb.org/anthology/N16-1123
+  https://github.com/ma-sultan/short-answer-grader
