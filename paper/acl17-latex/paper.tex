@@ -87,7 +87,7 @@ We have tried to analyze these models over various qualitative metrics on which 
 
 
 
-\section{Model}\label{sec:models}
+\section{Models}\label{sec:models}
 
 \subsection{Neural Model}
 
@@ -124,52 +124,145 @@ We tried to analyze the effect of the length of the essay on the prediction of t
   \caption{Distribution of Length of essay and associated score in the test dataset \label{fig:length_plot}}        
 \end{figure*}
 
-
 \begin{table}[]
   \centering
   \resizebox{0.5\textwidth}{!}{%
   \begin{tabular}{|c|c|c|c|}
   \hline
-  \textbf{Prompt} & \textbf{Essays Tested} & \textbf{\%increase (Neural)} & \textbf{\%increase (Non-Neural)} \\ \hline
+  \textbf{Prompt} & \textbf{Essays Tested} & \multicolumn{2}{c|}{\textbf{\% Increase}} \\ \hline
+  \textbf{} & \textbf{} & \textbf{Neural} & \textbf{Non-Neural} \\ \hline
   1 & 37 & \textbf{72.785} & \textbf{37.240} \\ \hline
   2 & 45 & 53.428 & \textbf{33.843} \\ \hline
   3 & 93 & \textbf{137.284} & \textbf{56.061} \\ \hline
   4 & 85 & \textbf{235.539} & \textbf{44.515} \\ \hline
-  5 & 70 & \textbf{145.933} & \textbf{78.571} \\ \hline
+  5 & 70 & \textbf{145.933} & 78.571 \\ \hline
   6 & 72 & \textbf{119.254} & 161.905 \\ \hline
   7 & 53 & 40.181 & \textbf{14.659} \\ \hline
   8 & 23 & 0.279 & \textbf{4.141} \\ \hline
   \end{tabular}%
   }
-\caption{Effect of Length}
-\label{length}
-\end{table}
+  \caption{Effect of Length}
+  \label{length}
+  \end{table}
+
 
 \subsection{Effect of Spelling Mistakes}
-We tried to analyze the effect of the spelling mistakes on the prediction of the models. We randomly chose 20\% of the words of the essay and then randomly shuffled the characters of the words to generate words with wrong spellings. We had a set of predicted scores for the essays with correct spellings and a new set of predicted scores for essays with wrong spellings. We calculated QWK between these two sets of scores. \cref{spelling_word} shows that for the neural model, the QWK is close to 1 for most prompts whereas it is very close to 0 for non-neural model. Thus, for the neural model there is no disagreement between the scores predicted for essays with correct spellings and essays with 20\% wrong spellings.
+We tried to analyze the effect of the spelling mistakes on the prediction of the models. We randomly chose 20\% of the words of the essay and then randomly shuffled the characters of the words to generate words with wrong spellings. We had a set of predicted scores for the essays with correct spellings and a new set of predicted scores for essays with wrong spellings. We calculated QWK between these two sets of scores. \cref{spell_word_sentence} shows that for the neural model, the QWK is close to 1 for most prompts whereas it is very close to 0 for non-neural model. Thus, for the neural model there is no disagreement between the scores predicted for essays with correct spellings and essays with 20\% wrong spellings.
+
+% \begin{table}[]
+%   \centering
+%   \resizebox{0.5\textwidth}{!}{%  
+%   \begin{tabular}{|c|c|c|c|}
+%   \hline
+%   \textbf{Prompt} & \textbf{Essays Tested} & \textbf{QWK (Neural)} & \textbf{QWK (Non-Neural)} \\ \hline
+%   1 & 357 & \textbf{0.944} & \textbf{0.027} \\ \hline
+%   2 & 360 & 0.408 & \textbf{0.013} \\ \hline
+%   3 & 345 & \textbf{0.901} & \textbf{0.163} \\ \hline
+%   4 & 355 & \textbf{0.936} & \textbf{0.019} \\ \hline
+%   5 & 361 & \textbf{0.930} & \textbf{0.027} \\ \hline
+%   6 & 360 & 0.591 & \textbf{0.017} \\ \hline
+%   7 & 314 & \textbf{0.871} & \textbf{0.081} \\ \hline
+%   8 & 145 & \textbf{0.822} & \textbf{0.086} \\ \hline
+%   \end{tabular}
+%   }
+%   \caption{Effect of Spelling Mistakes}
+%   \label{spelling}
+%   \end{table}
 
 \subsection{Effect of Word Shuffle}
-We tried to analyze the effect of the spelling mistakes on the prediction of the models. We randomly shuffled the words of each sentence in the essay. This resulted in an essay with terrible grammar, and thus should be scored low by any good AES system. We had a set of predicted scores for the essays with good grammar and a new set of predicted scores for essays with bad grammar and a lot of grammatical mistakes. We calculated QWK between these two sets of scores. \cref{spelling_word} shows that for the neural model, the QWK is close to 1 for most prompts whereas it is significantly less than 1 for the non-neural model. Thus, for the neural model there is no disagreement between the scores predicted for essays with correct grammar and essays with bad grammar.
+We tried to analyze the effect of the bad grammar on the prediction of the models. We randomly shuffled the words of each sentence in the essay. This resulted in an essay with terrible grammar, and thus should be scored low by any good AES system. We had a set of predicted scores for the essays with good grammar and a new set of predicted scores for essays with bad grammar and a lot of grammatical mistakes. We calculated QWK between these two sets of scores. \cref{spell_word_sentence} shows that for the neural model, the QWK is close to 1 for most prompts whereas it is significantly less than 1 for the non-neural model. Thus, for the neural model there is no disagreement between the scores predicted for essays with correct grammar and essays with bad grammar.
 
-\begin{table*}[h]
+% \begin{table}[]
+%   \centering
+%   \resizebox{0.5\textwidth}{!}{%    
+%   \begin{tabular}{|c|c|c|c|}
+%   \hline
+%   \textbf{Prompt} & \textbf{Essays Tested} & \textbf{QWK (Neural)} & \textbf{QWK (Non- Neural)} \\ \hline
+%   1 & 357 & \textbf{0.940} & 0.991 \\ \hline
+%   2 & 360 & 0.739 & \textbf{0.515} \\ \hline
+%   3 & 345 & \textbf{0.893} & 0.709 \\ \hline
+%   4 & 355 & \textbf{0.930} & \textbf{0.495} \\ \hline
+%   5 & 361 & \textbf{0.913} & \textbf{0.251} \\ \hline
+%   6 & 360 & \textbf{0.914} & \textbf{0.306} \\ \hline
+%   7 & 314 & \textbf{0.944} & 0.962 \\ \hline
+%   8 & 145 & \textbf{0.934} & 0.931 \\ \hline
+%   \end{tabular}
+%   }
+%   \caption{Effect of Word Shuffle}
+%   \label{word_shuffle}
+%   \end{table}
+
+\subsection{Effect of Sentence Shuffle}
+  We tried to analyze the effect of the bad organization and flow of ideas on the prediction of the models. We randomly shuffled the sentences of the essay. This resulted in an essay with terrible organization and flow of ideas, and thus should be scored low by any good AES system. We had a set of predicted scores for the essays with good flow of ideas and a new set of predicted scores for essays with a poor organization. We calculated QWK between these two sets of scores. \cref{spell_word_sentence} shows that for both the the models, the QWK is close to 1 for most prompts. Thus, there is no disagreement between the scores predicted for essays with good organization and flow of ideas and essays without it for both the models.
+
+% \begin{table}[]
+%   \centering
+%   \resizebox{0.5\textwidth}{!}{%
+%   \begin{tabular}{|c|c|c|c|}
+%   \hline
+%   \textbf{Prompt} & \textbf{Essays Tested} & \textbf{QWK (Neural)} & \textbf{QWK (Non- Neural)} \\ \hline
+%   1 & 357 & \textbf{0.919} & \textbf{1.000} \\ \hline
+%   2 & 360 & \textbf{0.847} & \textbf{0.997} \\ \hline
+%   3 & 345 & \textbf{0.906} & \textbf{0.995} \\ \hline
+%   4 & 355 & \textbf{0.944} & \textbf{0.986} \\ \hline
+%   5 & 361 & \textbf{0.903} & \textbf{0.998} \\ \hline
+%   6 & 360 & \textbf{0.907} & \textbf{0.984} \\ \hline
+%   7 & 314 & \textbf{0.977} & \textbf{0.998} \\ \hline
+%   8 & 145 & \textbf{0.991} & \textbf{0.999} \\ \hline
+%   \end{tabular}%
+%   }
+%   \caption{Effect of Sentence Shuffle}
+%   \label{sentence_shuffle}
+%   \end{table}
+
+\begin{table*}[]
   \centering
   \resizebox{\textwidth}{!}{%
-  \begin{tabular}{|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|}
   \hline
-  \textbf{Prompt} & \textbf{Essays Tested} & \textbf{QWK Spelling (Neural)} & \textbf{QWK Spelling (Non-Neural)} & \textbf{QWK Word Shuffle (Neural)} & \textbf{QWK Word Shuffle (Non- Neural)} \\ \hline
-  1 & 357 & \textbf{0.944} & \textbf{0.027} & \textbf{0.940} & 0.991 \\ \hline
-  2 & 360 & 0.408 & \textbf{0.013} & 0.739 & \textbf{0.515} \\ \hline
-  3 & 345 & \textbf{0.901} & \textbf{0.163} & \textbf{0.893} & 0.709 \\ \hline
-  4 & 355 & \textbf{0.936} & \textbf{0.019} & \textbf{0.930} & \textbf{0.495} \\ \hline
-  5 & 361 & \textbf{0.930} & \textbf{0.027} & \textbf{0.913} & \textbf{0.251} \\ \hline
-  6 & 360 & 0.591 & \textbf{0.017} & \textbf{0.914} & \textbf{0.306} \\ \hline
-  7 & 314 & \textbf{0.871} & \textbf{0.081} & \textbf{0.944} & 0.962 \\ \hline
-  8 & 145 & \textbf{0.822} & \textbf{0.086} & \textbf{0.934} & 0.931 \\ \hline
+  \textbf{Prompt} & \textbf{Essays Tested} & \multicolumn{2}{c|}{\textbf{Spelling Mistakes}} & \multicolumn{2}{c|}{\textbf{Word Shuffle}} & \multicolumn{2}{c|}{\textbf{Sentence Shuffle}} \\ \hline
+  \textbf{} & \textbf{} & \textbf{Neural} & \textbf{Non-Neural} & \textbf{Neural} & \textbf{Non-Neural} & \textbf{Neural} & \textbf{Non-Neural} \\ \hline
+  1 & 357 & \textbf{0.944} & \textbf{0.027} & \textbf{0.940} & 0.991 & \textbf{0.919} & \textbf{1.000} \\ \hline
+  2 & 360 & 0.408 & \textbf{0.013} & 0.739 & \textbf{0.515} & \textbf{0.847} & \textbf{0.997} \\ \hline
+  3 & 345 & \textbf{0.901} & \textbf{0.163} & \textbf{0.893} & 0.709 & \textbf{0.906} & \textbf{0.995} \\ \hline
+  4 & 355 & \textbf{0.936} & \textbf{0.019} & \textbf{0.930} & \textbf{0.495} & \textbf{0.944} & \textbf{0.986} \\ \hline
+  5 & 361 & \textbf{0.930} & \textbf{0.027} & \textbf{0.913} & \textbf{0.251} & \textbf{0.903} & \textbf{0.998} \\ \hline
+  6 & 360 & 0.591 & \textbf{0.017} & \textbf{0.914} & \textbf{0.306} & \textbf{0.907} & \textbf{0.984} \\ \hline
+  7 & 314 & \textbf{0.871} & \textbf{0.081} & \textbf{0.944} & 0.962 & \textbf{0.977} & \textbf{0.998} \\ \hline
+  8 & 145 & \textbf{0.822} & \textbf{0.086} & \textbf{0.934} & 0.931 & \textbf{0.991} & \textbf{0.999} \\ \hline
   \end{tabular}%
   }
-  \caption{Effect of Spelling Mistakes and Word Shuffle}
-  \label{spelling_word}
+  \caption{Effect of spelling mistakes, grammatical errors and poor organization in terms of QWK between old predicted scores and new predicted scores}
+  \label{spell_word_sentence}
   \end{table*}
+
+
+\section{Methods Proposed}
+
+\subsection{Data Bootstrapping}
+
+\acomment{Write this up}
+
+\subsection{New Tokens}
+
+Presently, the neural model used a special symbol of \textit{\textless UNK \textgreater} for out-of-vocabulary words. Thus words which have wrong spelling, were replaced with the embedding of \textit{\textless UNK \textgreater}. We added a new symbol \textit{\textless MISSPELL \textgreater}. We checked if word has correct spelling using a corpus of 200,000+ words and if it had a wrong spelling, it was replaced with the symbol \textit{\textless MISSPELL \textgreater}. 
+
+\acomment{Add table for QWK changes with spelling mistakes on this model.}
+
+\subsection{Hierarchial LSTM}
+
+The current SoTA neural model, used basic LSTM cell to encode the whole essay. Typically, an essay has a length of about 500 tokens, and it is very hard for a LSTM to remember this long sequence. We proposed using hierarchical LSTM network to mitigate the long history length and to model grammar and coherence better. We effectively run a LSTM over the words of each sentence and generate a vector representation of the sentence and then run a LSTM over the representations of the sentences learned in the previous layer to generate a representation of the essay. 
+
+\acomment{Add table for QWK changes with word and sentence shuffle mistakes on this model.}
+
+
+
+\section{Conclusions}
+
+\acomment{Write this up}
+
+
+
 
 \FloatBarrier
 
