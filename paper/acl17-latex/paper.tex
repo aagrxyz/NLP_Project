@@ -42,27 +42,40 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-  Automated essay scoring systems are used in evaluating and scoring student essays written based on a given prompt. Recent advances in Deep Learning and Natural Language Processing have produced state of art results in this task. The performance of these systems are approaching human level according to the evaluation metrics, but their qualitative performance in actual scenarios is not explored. In this paper we explore these systems perform in real life scenarios as compared to other non-neural models. We also explore some ways to overcome these shortcomings.
+  Automated essay scoring systems(AES) are used in evaluating and scoring student essays written based on a given prompt. Recent advances in Deep Learning and Natural Language Processing have produced state of art results in this task. These systems are approaching human level performance according to the evaluation metrics, but their qualitative performance in actual scenarios is not yet explored. In this paper we explore and analyze how these systems perform in real life scenarios as compared to other non-neural models. We also explore some ways to overcome these shortcomings.
 \end{abstract}
 
 \section{Introduction}
 
-Automated essay scoring systems(AES) are used in evaluating and scoring student essays written based on a given prompt. The performance of these systems is assessed by comparing their scores assigned to a set of essays to human-assigned gold-standard scores.
+Essay writing is usually a part of the student assessment  process. Several  organizations, such as Educational Testing Service (ETS)\cite{ets}, evaluate the writing skills of students in their examinations. Because of the large number of students participating in these exams, grading all essays is very time-consuming. 
+Thus, automated essay scoring systems(AES) are used in evaluating and scoring student essays written based on a given prompt. The performance of these systems is assessed by comparing their scores assigned to a set of essays to human-assigned gold-standard scores.
 Since the output of AES systems is usually a real valued number, the task is often addressed as a supervised machine learning task.
 Recently, there is a lot of development of deep neural models for the task of automated essay scoring.
-These models have shown to out perform the traditional models based on hand coded features and currently have the state of art performance in this task. The current state of art model is from Taghipour et al. \cite{nea} and the state of art non-neural model is EASE \cite{ease}.
-In this paper we explore the performance of deep-learning based systems on real life scenarios. We try to see if their performance is actually better than traditional non-neural based models in qualitative sense.
+These models have shown to out perform the traditional models based on hand crafted features and currently have the state of art performance in this task. The current state of art model that we presently know of is from Taghipour et al. \cite{nea} and the state of art non-neural model is Enhanced AI Scoring Engine (EASE) \cite{ease}.
+In this paper we explore the performance of deep-learning based systems on real life scenarios. We try to see if their performance is actually better than traditional non-neural based models in a qualitative sense and analyze the issues that these systems can cause.
 
-Essay writing is usually a part of the student assessment  process.    Several  organizations,  such  as Educational Testing Service (ETS)\cite{ets}, evaluate the writing skills of students in their examinations. Because of the large number of  students participating in these exams, grading all essays is very time-consuming. Thus, some organizations have been using AES systems to reduce the time and cost of scoring essays. Therefore, it is of prime importance that we understand the metrics that these new models are actually using to score the essays.
+  % Our experiments on the AES systems aims to test the response of models to spelling and grammatical errors. It also tests if the model really considers the flow of ideas and organization of essay. Along with this, we also try to test if model recoginzes deviation from topic. Effect of length of essay is also studied. We finally suggest some ways to improve the performance of model on these metrics.
+
+  % The rest of this paper is organized as follows. Section 2 gives an overview of related work in the literature. Section 3 describes the  details of our experiments, and present and discuss the results of our experimental evaluation in Section 4. Finally, we suggest some ways to improve the models in Section 5 and conclude the paper in Section 6.
 
 
-Automated essay scoring refers to the process of grading student essays without human interference. An AES system takes as input an essay written for a given prompt, and then assigns a numeric score to the essay reflecting its quality, based on its  content, grammar, and organization.
 
-Our experiments on the AES systems aims to test the response of models to spelling and grammatical errors. It also tests if the model really considers the flow of ideas and organization of essay. Along with this, we also try to test if model recoginzes deviation from topic. Effect of length of essay is also studied. We finally suggest some ways to improve the performance of model on these metrics.
+\section{Related Work}
 
-The rest of this paper is organized as follows. Section 2 gives an overview of related work in the literature. Section 3 describes the  details of our experiments, and present and discuss the results of our experimental evaluation in Section 4. Finally, we suggest some ways to improve the models in Section 5 and conclude the paper in Section 6.
+There exist many automated essay scoring systems \cite{shermis2013handbook} and some of them are being used in high-stakes assessments. E-rater \cite{attali2004automated} and Intelligent Essay Assessor \cite{foltz1999intelligent} are two notable examples of AES systems. In 2012, a competition on automated essay scoring called \textit{Automated Student Assessment Prize (ASAP)} was organized by Kaggle and sponsored by the Hewlett Foundation. A comprehensive comparison of AES systems was made in the ASAP competition. Many AES systems have been developed to date, and most of them have been built with hand-crafted features and supervised machine learning algorithms. Researchers have devoted a substantial amount of effort to design effective features for automated essay scoring. These features can be as simple as essay length \cite{chen2013automated} or more complicated such as lexical complexity, grammaticality of a text \cite{attali2004automated}, or syntactic features \cite{chen2013automated}. Readability features \cite{zesch2015task} have also been proposed in the literature as another source of information. Moreover, text coherence has also been exploited to assess the flow of information and argumentation of an essay \cite{chen2013automated}. A detailed overview of the features used in AES systems can be found in \cite{zesch2015task}. 
 
-\section{General Instructions}
+Recently due to a lot of surge in deep-learning, a lot of neural models have been proposed which claim to beat the human level performance on evaluation metrics. Unlike traditional systems these systems, accepts an essay text as input directly and learns the features automatically from the data. A lot of models with varying architectures have been developed in the recent years. Some of them use a long short-term memory network (LSTM) \cite{taghipour2016neural}, while others use a convolutional neural networks (CNN) \cite{dong2016automatic} for the effect of automatically learning features. Some of them also use an augmented method to learn word embeddings \cite{alikaniotis2016automatic}. 
+
+
+
+
+
+
+
+
+
+
+\section{ Instructions}
 
 Manuscripts must be in two-column format.  Exceptions to the
 two-column format include the title, authors' names and complete
