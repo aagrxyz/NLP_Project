@@ -48,7 +48,7 @@
 \newcommand{\figref}[1]{\hyperref[{#1}]{\autoref*{#1}}} % One single link
 
 
-\title{Automated Essay Scoring}
+\title{Debunking Neural Essay Scoring}
 
 \author{Aman Agrawal \\
   IIT Delhi \\
@@ -108,7 +108,7 @@ All of our analysis stated below has been done using the test dataset.
 
 \subsection{Effect of Length}
 
-We tried to analyze the effect of the length of the essay on the prediction of the models. Typically, low scoring essays have low scores and this can be seen from \cref{fig:length_plot}. Let, $\mu_l$ denote the mean length of the essays in the test set and $\sigma_l$ denote the standard deviation of the lengths. We selected essays from each prompt that had length less than $\mu_l - 2\sigma_l$ and appended the same essay till the point where the length of the essay exceeded $\mu_l - 2\sigma_l$. The mean score of these essays before and after increasing length were calculated and the percentage increase in the score was calculated. \ref{length} shows that the average increase in the predicted score of the essay is $100.58\%$ while for some test sets the increase in the score was close to $235.53\%$. 
+We tried to analyze the effect of the length of the essay on the prediction of the models. Typically, low scoring essays have low scores and this can be seen from \cref{fig:length_plot}. Let, $\mu_l$ denote the mean length of the essays in the test set and $\sigma_l$ denote the standard deviation of the lengths. We selected essays from each prompt that had length less than $\mu_l - 2\sigma_l$ and appended the same essay till the point where the length of the essay exceeded $\mu_l - 2\sigma_l$. The mean score of these essays before and after increasing length were calculated and the percentage increase in the score was calculated. \cref{length} shows that the average increase in the predicted score of the essay is $100.58\%$ while for some test sets the increase in the score was close to $235.53\%$. 
 
 \begin{figure*}
   \centering             
@@ -243,12 +243,9 @@ We tried to analyze the effect of the bad grammar on the prediction of the model
 In the current dataset, most of the essays are reasonably good and hence the neural models are not able to learn that longer essays does not necessarily mean better scores. Also, it is not able to learn that spelling mistakes should reduce the overall score.
 To overcome this problem we propose to augment the dataset with negative examples like adding longer essays with lower scores (by concatenating low score and small essays multiple times).  
 
-% \acomment{Write this up}
-
 \subsection{New Tokens}
 
-Presently, the neural model used a special symbol of \textit{\textless UNK \textgreater} for out-of-vocabulary words. Thus words which have wrong spelling, were replaced with the embedding of \textit{\textless UNK \textgreater}. We added a new symbol \textit{\textless MISSPELL \textgreater}. We checked if word has correct spelling using a corpus of 200,000+ words and if it had a wrong spelling, it was replaced with the symbol \textit{\textless MISSPELL \textgreater}.\\
-% We tested this by converting $20\%$ words of each essay to a misspelled word and then calculated score given by our new model and previous model. Results are shown in \cref{misp_diff} and suggest that \textless MISSPELL \textgreater helps in assigning low scores to misspelled essays.
+Presently, the neural model used a special symbol of \textit{\textless UNK \textgreater} for out-of-vocabulary words. Thus words which have wrong spelling, were replaced with the embedding of \textit{\textless UNK \textgreater}. We added a new symbol \textit{\textless MISSPELL \textgreater}. We checked if word has correct spelling using a corpus of 200,000+ words and if it had a wrong spelling, it was replaced with the symbol \textit{\textless MISSPELL \textgreater}. We analyzed the effects of spelling mistakes on this model, and the results are shown in \cref{misp_diff} and suggest that \textless MISSPELL \textgreater helps in assigning low scores to misspelled essays.
 
 \begin{table}[]
   \centering
@@ -257,13 +254,13 @@ Presently, the neural model used a special symbol of \textit{\textless UNK \text
   \hline
   \textbf{Prompt} & \textbf{QWK} \\ \hline
   1 & 0.792 \\ \hline
-  2 & 0.277 \\ \hline
+  2 & \textbf{0.277} \\ \hline
   3 & 0.888 \\ \hline
   4 & 0.837 \\ \hline
   5 & 0.907 \\ \hline
   6 & 0.890 \\ \hline
-  7 & 0.636 \\ \hline
-  8 & 0.242 \\ \hline
+  7 & \textbf{0.636} \\ \hline
+  8 & \textbf{0.242} \\ \hline
   \end{tabular}
   % }
   \caption{Effect of adding \textless MISSPELL\textgreater token (measure as QWK score between old prediction and new prediction)}
@@ -296,7 +293,7 @@ Presently, the neural model used a special symbol of \textit{\textless UNK \text
 
 \subsection{Hierarchial LSTM}
 
-The current SoTA neural model, used basic LSTM cell to encode the whole essay. Typically, an essay has a length of about 500 tokens, and it is very hard for a LSTM to remember this long sequence. We proposed using hierarchical LSTM network to mitigate the long history length and to model grammar and coherence better. We effectively run a LSTM over the words of each sentence and generate a vector representation of the sentence and then run a LSTM over the representations of the sentences learned in the previous layer to generate a representation of the essay.\\ 
+The current SoTA neural model, used basic LSTM cell to encode the whole essay. Typically, an essay has a length of about 500 tokens, and it is very hard for a LSTM to remember this long sequence. We propose using an hierarchical LSTM network to mitigate the long history length and to model grammar and coherence better. We effectively run a LSTM over the words of each sentence and generate a vector representation of the sentence and then run a LSTM over the representations of the sentences learned in the previous layer to generate a representation of the essay.\\ 
 We were not able to get satisfactory results with this approach (shown in \cref{hlstm}). One of the possible explanations for this is that the dataset size is too small for hierarchical LSTM to learn the grammar.
 % \acomment{Add table for QWK changes with word and sentence shuffle mistakes on this model.}
 
@@ -315,22 +312,14 @@ We were not able to get satisfactory results with this approach (shown in \cref{
   7 & 0.976 \\ \hline
   8 & 0.970 \\ \hline
   \end{tabular}
-  \caption{Effect of sentence shuffle (agreement between LSTM and Heirarchical LSTM using QWK metric)}
+  \caption{Effect of sentence shuffle (agreement between LSTM and Hierarchical LSTM using QWK metric)}
   \label{hlstm}
 \end{table}
 
 
 \section{Conclusions}
-In this paper we have analyzed the behavior of neural model for automated essay scoring on various practical scenarios. We performed various experiments for effect of length, grammar, spelling, organization and found that neural models perform subpar in these qualitative metrics even while giving state of art performance on the benchmarks. This shows that the problem of automated essay scoring is far from being solved and getting human level performance on benchmarks is not the solution. This also shows that the current benchmarks are not sufficient for evaluation and calls for the need of better metrics. We have also suggest some solution to problems like length-score inflation, misspelled words.
+In this paper we have analyzed the behavior of neural model for automated essay scoring on various practical scenarios. We performed various experiments for effect of length, grammar, spelling, organization and found that neural models perform very poorly in these qualitative metrics even while giving state of art performance on the quantitative benchmarks. This shows that the problem of automated essay scoring is far from being solved and getting human level performance on benchmarks is not the solution. This also shows that the current benchmarks are not sufficient for evaluation and thus call for the need of better metrics. We have also suggested some solutions to problems like length-score inflation, misspelled words, but still questions whether these systems can be deployed in real life.
 
-
-
-\acomment{Write this up}
-
-
-
-
-\FloatBarrier
 
 \bibliography{paper}
 \bibliographystyle{acl_natbib}
