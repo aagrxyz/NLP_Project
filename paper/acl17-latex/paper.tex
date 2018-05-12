@@ -252,23 +252,43 @@ Presently, the neural model used a special symbol of \textit{\textless UNK \text
 
 \begin{table}[]
   \centering
-  \resizebox{0.5\textwidth}{!}{%
-  \begin{tabular}{|l|l|l|l|}
+  % \resizebox{0.5\textwidth}{!}{%
+  \begin{tabular}{|l|l|}
   \hline
-  \textbf{Prompt} & \textbf{Previous Score} & \textbf{New Score} & \textbf{\% Decrease} \\ \hline
-  1 & 0.647 & 0.588 & \textbf{26.16} \\ \hline
-  2 & 0.469 & 0.268 & \textbf{10.07} \\ \hline
-  3 & 0.590 & 0.606 & \textbf{43.72} \\ \hline
-  4 & 0.458 & 0.376 & \textbf{36.21} \\ \hline
-  5 & 0.603 & 0.567 & \textbf{33.80} \\ \hline
-  6 & 0.667 & 0.618 & \textbf{25.98} \\ \hline
-  7 & 0.532 & 0.418 & \textbf{25.39} \\ \hline
-  8 & 0.614 & 0.449 & \textbf{11.68} \\ \hline
-  \end{tabular}%
-  }
-  \caption{Scores of new model (with \textless MISSPELL\textgreater token) and old model on essays with $20\%$ misspelled words.}
+  \textbf{Prompt} & \textbf{QWK} \\ \hline
+  1 & 0.792 \\ \hline
+  2 & 0.277 \\ \hline
+  3 & 0.888 \\ \hline
+  4 & 0.837 \\ \hline
+  5 & 0.907 \\ \hline
+  6 & 0.890 \\ \hline
+  7 & 0.636 \\ \hline
+  8 & 0.242 \\ \hline
+  \end{tabular}
+  % }
+  \caption{Effect of adding \textless MISSPELL\textgreater token (measure as QWK score between old prediction and new prediction)}
   \label{misp_diff}
-  \end{table}
+\end{table}
+
+% \begin{table}[]
+%   \centering
+%   \resizebox{0.5\textwidth}{!}{%
+%   \begin{tabular}{|l|l|l|l|}
+%   \hline
+%   \textbf{Prompt} & \textbf{Previous Score} & \textbf{New Score} & \textbf{\% Decrease} \\ \hline
+%   1 & 0.647 & 0.588 & \textbf{26.16} \\ \hline
+%   2 & 0.469 & 0.268 & \textbf{10.07} \\ \hline
+%   3 & 0.590 & 0.606 & \textbf{43.72} \\ \hline
+%   4 & 0.458 & 0.376 & \textbf{36.21} \\ \hline
+%   5 & 0.603 & 0.567 & \textbf{33.80} \\ \hline
+%   6 & 0.667 & 0.618 & \textbf{25.98} \\ \hline
+%   7 & 0.532 & 0.418 & \textbf{25.39} \\ \hline
+%   8 & 0.614 & 0.449 & \textbf{11.68} \\ \hline
+%   \end{tabular}%
+%   }
+%   \caption{Scores of new model (with \textless MISSPELL\textgreater token) and old model on essays with $20\%$ misspelled words.}
+%   \label{misp_diff}
+%   \end{table}
   
   
 
@@ -283,24 +303,27 @@ We were not able to get satisfactory results with this approach (shown in \cref{
 
 \begin{table}[]
   \centering
-  \begin{tabular}{|l|l|l|}
+  \begin{tabular}{|l|l|}
   \hline
-  \textbf{Prompt} & \textbf{LSTM Score} & \textbf{H-LSTM Score} \\ \hline
-  1 & 0.633 & 0.633 \\ \hline
-  2 & 0.408 & 0.401 \\ \hline
-  3 & 0.603 & 0.604 \\ \hline
-  4 & 0.498 & 0.495 \\ \hline
-  5 & 0.626 & 0.618 \\ \hline
-  6 & 0.719 & 0.701 \\ \hline
-  7 & 0.543 & 0.543 \\ \hline
-  8 & 0.531 & 0.532 \\ \hline
+  \textbf{Prompt} & \textbf{QWK} \\ \hline
+  1 & 0.962 \\ \hline
+  2 & 0.915 \\ \hline
+  3 & 0.912 \\ \hline
+  4 & 0.966 \\ \hline
+  5 & 0.954 \\ \hline
+  6 & 0.934 \\ \hline
+  7 & 0.976 \\ \hline
+  8 & 0.970 \\ \hline
   \end{tabular}
-  \caption{Effect of sentence shuffle on LSTM and Heirarchical LSTM models}
+  \caption{Effect of sentence shuffle (agreement between LSTM and Heirarchical LSTM using QWK metric)}
   \label{hlstm}
 \end{table}
 
 
 \section{Conclusions}
+In this paper we have analyzed the behavior of neural model for automated essay scoring on various practical scenarios. We performed various experiments for effect of length, grammar, spelling, organization and found that neural models perform subpar in these qualitative metrics even while giving state of art performance on the benchmarks. This shows that the problem of automated essay scoring is far from being solved and getting human level performance on benchmarks is not the solution. This also shows that the current benchmarks are not sufficient for evaluation and calls for the need of better metrics. We have also suggest some solution to problems like length-score inflation, misspelled words.
+
+
 
 \acomment{Write this up}
 
