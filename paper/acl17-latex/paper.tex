@@ -240,21 +240,64 @@ We tried to analyze the effect of the bad grammar on the prediction of the model
 \section{Methods Proposed}
 
 \subsection{Data Bootstrapping}
+In the current dataset, most of the essays are reasonably good and hence the neural models are not able to learn that longer essays does not necessarily mean better scores. Also, it is not able to learn that spelling mistakes should reduce the overall score.
+To overcome this problem we propose to augment the dataset with negative examples like adding longer essays with lower scores (by concatenating low score and small essays multiple times).  
 
-\acomment{Write this up}
+% \acomment{Write this up}
 
 \subsection{New Tokens}
 
-Presently, the neural model used a special symbol of \textit{\textless UNK \textgreater} for out-of-vocabulary words. Thus words which have wrong spelling, were replaced with the embedding of \textit{\textless UNK \textgreater}. We added a new symbol \textit{\textless MISSPELL \textgreater}. We checked if word has correct spelling using a corpus of 200,000+ words and if it had a wrong spelling, it was replaced with the symbol \textit{\textless MISSPELL \textgreater}. 
+Presently, the neural model used a special symbol of \textit{\textless UNK \textgreater} for out-of-vocabulary words. Thus words which have wrong spelling, were replaced with the embedding of \textit{\textless UNK \textgreater}. We added a new symbol \textit{\textless MISSPELL \textgreater}. We checked if word has correct spelling using a corpus of 200,000+ words and if it had a wrong spelling, it was replaced with the symbol \textit{\textless MISSPELL \textgreater}.\\
+% We tested this by converting $20\%$ words of each essay to a misspelled word and then calculated score given by our new model and previous model. Results are shown in \cref{misp_diff} and suggest that \textless MISSPELL \textgreater helps in assigning low scores to misspelled essays.
 
-\acomment{Add table for QWK changes with spelling mistakes on this model.}
+\begin{table}[]
+  \centering
+  \resizebox{0.5\textwidth}{!}{%
+  \begin{tabular}{|l|l|l|l|}
+  \hline
+  \textbf{Prompt} & \textbf{Previous Score} & \textbf{New Score} & \textbf{\% Decrease} \\ \hline
+  1 & 0.647 & 0.588 & \textbf{26.16} \\ \hline
+  2 & 0.469 & 0.268 & \textbf{10.07} \\ \hline
+  3 & 0.590 & 0.606 & \textbf{43.72} \\ \hline
+  4 & 0.458 & 0.376 & \textbf{36.21} \\ \hline
+  5 & 0.603 & 0.567 & \textbf{33.80} \\ \hline
+  6 & 0.667 & 0.618 & \textbf{25.98} \\ \hline
+  7 & 0.532 & 0.418 & \textbf{25.39} \\ \hline
+  8 & 0.614 & 0.449 & \textbf{11.68} \\ \hline
+  \end{tabular}%
+  }
+  \caption{Scores of new model (with \textless MISSPELL\textgreater token) and old model on essays with $20\%$ misspelled words.}
+  \label{misp_diff}
+  \end{table}
+  
+  
+
+% \acomment{Add table for QWK changes with spelling mistakes on this model.}
 
 \subsection{Hierarchial LSTM}
 
-The current SoTA neural model, used basic LSTM cell to encode the whole essay. Typically, an essay has a length of about 500 tokens, and it is very hard for a LSTM to remember this long sequence. We proposed using hierarchical LSTM network to mitigate the long history length and to model grammar and coherence better. We effectively run a LSTM over the words of each sentence and generate a vector representation of the sentence and then run a LSTM over the representations of the sentences learned in the previous layer to generate a representation of the essay. 
+The current SoTA neural model, used basic LSTM cell to encode the whole essay. Typically, an essay has a length of about 500 tokens, and it is very hard for a LSTM to remember this long sequence. We proposed using hierarchical LSTM network to mitigate the long history length and to model grammar and coherence better. We effectively run a LSTM over the words of each sentence and generate a vector representation of the sentence and then run a LSTM over the representations of the sentences learned in the previous layer to generate a representation of the essay.\\ 
+We were not able to get satisfactory results with this approach (shown in \cref{hlstm}). One of the possible explanations for this is that the dataset size is too small for hierarchical LSTM to learn the grammar.
+% \acomment{Add table for QWK changes with word and sentence shuffle mistakes on this model.}
 
-\acomment{Add table for QWK changes with word and sentence shuffle mistakes on this model.}
 
+\begin{table}[]
+  \centering
+  \begin{tabular}{|l|l|l|}
+  \hline
+  \textbf{Prompt} & \textbf{LSTM Score} & \textbf{H-LSTM Score} \\ \hline
+  1 & 0.633 & 0.633 \\ \hline
+  2 & 0.408 & 0.401 \\ \hline
+  3 & 0.603 & 0.604 \\ \hline
+  4 & 0.498 & 0.495 \\ \hline
+  5 & 0.626 & 0.618 \\ \hline
+  6 & 0.719 & 0.701 \\ \hline
+  7 & 0.543 & 0.543 \\ \hline
+  8 & 0.531 & 0.532 \\ \hline
+  \end{tabular}
+  \caption{Effect of sentence shuffle on LSTM and Heirarchical LSTM models}
+  \label{hlstm}
+\end{table}
 
 
 \section{Conclusions}
